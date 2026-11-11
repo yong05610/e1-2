@@ -46,6 +46,9 @@ class QuizGame:
         # 속성(attribute): 객체가 가지는 데이터
         self.running = True
         self.quizzes = self.default_quizzes()  # 퀴즈 목록 (list)
+        self.best_score = None  # 최고 점수 (아직 안 풀었으면 None)
+        self.best_total = None  # 최고 점수를 냈을 때의 전체 문제 수
+        self.best_correct = None  # 최고 점수를 냈을 때의 정답 수
 
     # ---------- 기본 데이터 ----------
     def default_quizzes(self):
@@ -118,7 +121,27 @@ class QuizGame:
         score = correct * 100 // total
         print(self.LINE)
         print(f"🏆 결과: {total}문제 중 {correct}문제 정답! ({score}점)")
+        if self.update_best_score(score, correct, total):
+            print("🎉 새로운 최고 점수입니다!")
         print(self.LINE)
+
+    def update_best_score(self, score, correct, total):
+        """최고 점수보다 높으면 갱신하고 True를 반환한다."""
+        if self.best_score is None or score > self.best_score:
+            self.best_score = score
+            self.best_correct = correct
+            self.best_total = total
+            return True
+        return False
+
+    # ---------- 점수 확인 ----------
+    def show_score(self):
+        if self.best_score is None:
+            print("⚠️ 아직 퀴즈를 풀지 않았습니다. 먼저 퀴즈를 풀어보세요.")
+            return
+        print(f"
+🏆 최고 점수: {self.best_score}점 "
+              f"({self.best_total}문제 중 {self.best_correct}문제 정답)")
 
     # ---------- 퀴즈 추가 ----------
     def read_text(self, prompt):
@@ -160,6 +183,8 @@ class QuizGame:
             self.add_quiz()
         elif choice == 3:
             self.list_quizzes()
+        elif choice == 4:
+            self.show_score()
         elif choice == 5:
             print("프로그램을 종료합니다. 안녕히 가세요!")
             self.running = False
