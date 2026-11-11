@@ -1,5 +1,8 @@
 """QuizGame 클래스: 게임 전체(메뉴, 풀기, 추가, 목록, 점수)를 관리한다."""
 
+import json
+import os
+
 from quiz import Quiz
 
 
@@ -7,14 +10,63 @@ class QuizGame:
     """게임 전체를 관리하는 클래스"""
 
     LINE = "=" * 40
+    # 프로젝트 루트(이 파일이 있는 폴더)의 state.json
+    STATE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "state.json")
 
     def __init__(self):
         # 속성(attribute): 객체가 가지는 데이터
         self.running = True
-        self.quizzes = self.default_quizzes()  # 퀴즈 목록 (list)
+        self.quizzes = []  # 퀴즈 목록 (list)
         self.best_score = None  # 최고 점수 (아직 안 풀었으면 None)
         self.best_total = None  # 최고 점수를 냈을 때의 전체 문제 수
         self.best_correct = None  # 최고 점수를 냈을 때의 정답 수
+        self.load_state()
+
+    # ---------- 파일 저장/불러오기 ----------
+    def reset_state(self):
+        """기본 퀴즈와 빈 점수로 초기화한다."""
+        self.quizzes = self.default_quizzes()
+        self.best_score = None
+        self.best_total = None
+        self.best_correct = None
+
+    def load_state(self):
+        """state.json을 불러온다. 없거나 손상되면 기본 데이터를 사용한다."""
+        if not os.path.exists(self.STATE_FILE):
+            self.reset_state()
+            print("📂 저장된 데이터가 없어 기본 퀴즈를 사용합니다.")
+            return
+        try:
+            with open(self.STATE_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            quizzes = [Quiz.from_dict(item) for item in data["quizzes"]]
+            for quiz in quizzes:  # 데이터 형태 검증
+                if len(quiz.choices) != 4 or quiz.answer not in (1, 2, 3, 4):
+                    raise ValueError("퀴즈 형식 오류")
+            self.quizzes = quizzes
+            self.best_score = data.get("best_score")
+            self.best_total = data.get("best_total")
+            self.best_correct = data.get("best_correct")
+        except (json.JSONDecodeError, KeyError, TypeError, ValueError, OSError):
+            self.reset_state()
+            print("⚠️ 데이터 파일이 손상되어 기본 퀴즈로 초기화합니다.")
+            return
+        score_text = "없음" if self.best_score is None else f"{self.best_score}점"
+        print(f"📂 저장된 데이터를 불러왔습니다. (퀴즈 {len(self.quizzes)}개, 최고점수 {score_text})")
+
+    def save_state(self):
+        """퀴즈와 최고 점수를 state.json에 UTF-8로 저장한다."""
+        data = {
+            "quizzes": [quiz.to_dict() for quiz in self.quizzes],
+            "best_score": self.best_score,
+            "best_total": self.best_total,
+            "best_correct": self.best_correct,
+        }
+        try:
+            with open(self.STATE_FILE, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
+        except OSError:
+            print("⚠️ 데이터를 파일에 저장하지 못했습니다.")
 
     # ---------- 기본 데이터 ----------
     def default_quizzes(self):
@@ -98,6 +150,7 @@ class QuizGame:
             self.best_score = score
             self.best_correct = correct
             self.best_total = total
+            self.save_state()
             return True
         return False
 
@@ -126,6 +179,7 @@ class QuizGame:
             choices.append(self.read_text(f"선택지 {number}: "))
         answer = self.read_int("정답 번호 (1-4): ", 1, 4)
         self.quizzes.append(Quiz(question, choices, answer))
+        self.save_state()
         print("\n✅ 퀴즈가 추가되었습니다!")
 
     # ---------- 퀴즈 목록 ----------
@@ -162,4 +216,6 @@ class QuizGame:
                 choice = self.read_int("선택: ", 1, 5)
                 self.handle_choice(choice)
         except (KeyboardInterrupt, EOFError):
-            print("\n⚠️ 입력이 중단되었습니다. 안전하게 종료합니다.")
+            print("\n⚠️ 입력이 중단되었습니다. 저장 후 안전하게 종료합니다.")
+        finally:
+            self.save_state()  # 어떤 방식으로 끝나든 마지막에 저장
