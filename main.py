@@ -45,6 +45,25 @@ class QuizGame:
     def __init__(self):
         # 속성(attribute): 객체가 가지는 데이터
         self.running = True
+        self.quizzes = self.default_quizzes()  # 퀴즈 목록 (list)
+
+    # ---------- 기본 데이터 ----------
+    def default_quizzes(self):
+        """기본 퀴즈 6개를 Quiz 객체로 만들어 list로 반환"""
+        return [
+            Quiz("파이썬에서 리스트를 만들 때 사용하는 기호는?",
+                 ["()", "[]", "{}", "<>"], 2),
+            Quiz("type(3.14)의 결과로 알맞은 것은?",
+                 ["int", "str", "float", "bool"], 3),
+            Quiz("키와 값의 쌍으로 데이터를 저장하는 자료형은?",
+                 ["list", "dict", "tuple", "str"], 2),
+            Quiz("조건에 따라 분기할 때 사용하는 키워드가 아닌 것은?",
+                 ["if", "elif", "else", "loop"], 4),
+            Quiz("정해진 횟수만큼 반복할 때 주로 사용하는 구문은?",
+                 ["for", "if", "def", "class"], 1),
+            Quiz("함수를 정의할 때 사용하는 키워드는?",
+                 ["func", "def", "function", "define"], 2),
+        ]
 
     # ---------- 화면 ----------
     def show_menu(self):
