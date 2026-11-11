@@ -101,10 +101,11 @@
         }
     ],
     "best_score": 80,
-    "best_total": 5
+    "best_total": 5,
+    "best_correct": 4
 }
 ```
-- 키 이름은 `quizzes`, `best_score`, `best_total`로 고정한다.
+- 키 이름은 `quizzes`, `best_score`, `best_total`, `best_correct`로 고정한다.
 - 인코딩은 UTF-8, `ensure_ascii=False`, `indent=4`로 저장한다.
 
 ## 6. 기본 퀴즈 데이터 (초안, 정답 번호 1~4)
