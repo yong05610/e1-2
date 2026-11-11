@@ -120,10 +120,32 @@ class QuizGame:
         print(f"🏆 결과: {total}문제 중 {correct}문제 정답! ({score}점)")
         print(self.LINE)
 
+    # ---------- 퀴즈 추가 ----------
+    def read_text(self, prompt):
+        """빈 문자열이 아닌 텍스트를 입력받을 때까지 반복한다."""
+        while True:
+            text = input(prompt).strip()
+            if text:
+                return text
+            print("⚠️ 빈 입력입니다. 내용을 입력하세요.")
+
+    def add_quiz(self):
+        """문제, 선택지 4개, 정답 번호를 입력받아 퀴즈를 추가한다."""
+        print("\n📌 새로운 퀴즈를 추가합니다.\n")
+        question = self.read_text("문제를 입력하세요: ")
+        choices = []
+        for number in range(1, 5):
+            choices.append(self.read_text(f"선택지 {number}: "))
+        answer = self.read_int("정답 번호 (1-4): ", 1, 4)
+        self.quizzes.append(Quiz(question, choices, answer))
+        print("\n✅ 퀴즈가 추가되었습니다!")
+
     # ---------- 메뉴 동작 ----------
     def handle_choice(self, choice):
         if choice == 1:
             self.play_quiz()
+        elif choice == 2:
+            self.add_quiz()
         elif choice == 5:
             print("프로그램을 종료합니다. 안녕히 가세요!")
             self.running = False
