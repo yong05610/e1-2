@@ -139,8 +139,7 @@ class QuizGame:
         if self.best_score is None:
             print("⚠️ 아직 퀴즈를 풀지 않았습니다. 먼저 퀴즈를 풀어보세요.")
             return
-        print(f"
-🏆 최고 점수: {self.best_score}점 "
+        print(f"\n🏆 최고 점수: {self.best_score}점 "
               f"({self.best_total}문제 중 {self.best_correct}문제 정답)")
 
     # ---------- 퀴즈 추가 ----------
