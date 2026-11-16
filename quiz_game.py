@@ -2,6 +2,7 @@
 
 import json
 import os
+import random
 
 from quiz import Quiz
 
@@ -123,10 +124,14 @@ class QuizGame:
             print("⚠️ 등록된 퀴즈가 없습니다. 먼저 퀴즈를 추가하세요.")
             return
 
-        total = len(self.quizzes)
+        # 원본 목록(self.quizzes)의 순서는 그대로 두고, 복사본만 무작위로 섞는다
+        order = self.quizzes[:]
+        random.shuffle(order)
+
+        total = len(order)
         print(f"\n📝 퀴즈를 시작합니다! (총 {total}문제)\n")
         correct = 0
-        for index, quiz in enumerate(self.quizzes, start=1):
+        for index, quiz in enumerate(order, start=1):
             print("-" * 40)
             quiz.display(index)
             user_answer = self.read_int("정답 입력: ", 1, 4)
