@@ -84,7 +84,7 @@
 | 점수 | `Feat: 최고 점수 기능 구현`, `Fix: 점수 출력 문자열 오류 수정` |
 | 구조 정리 | `Refactor: Quiz/QuizGame/main 파일 분리 및 메서드 정리` |
 | 저장 | `Feat: state.json 저장 및 불러오기 구현 (손상/누락 복구 포함)` |
-| README | `Docs: README 작성 및 스터디 노트 추가` |
+| README | `Docs: README 작성` (9a87b09) |
 | 보너스: 랜덤 출제 (브랜치) | `Feat: 퀴즈 랜덤 출제 구현 (random.shuffle)` + 병합 커밋 |
 | 보너스: 문제 수 선택 (브랜치) | `Feat: 풀 문제 수 선택 기능 구현` + 병합 커밋 |
 | 제출물 정리 | `Docs: 제출 보고서, 스크린샷, README 갱신` |

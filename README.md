@@ -38,7 +38,6 @@ e1-2/
 ├── README.md
 ├── PRD.md         # 제품 요구사항 문서
 ├── task.md        # 작업 목록
-├── study.md       # 시험 대비 스터디 노트
 ├── mission.md     # 미션 설명
 └── .gitignore
 ```
