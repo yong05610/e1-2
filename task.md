@@ -116,24 +116,24 @@
 - [x] pull 결과가 반영되었는지 확인 (`git log`, README 확인)
 
 ## Task 13. 최종 점검 및 제출물
-- [ ] `git log --oneline` 기준 커밋 10개 이상인지 확인
+- [x] `git log --oneline` 기준 커밋 10개 이상인지 확인
 - [x] 브랜치 생성/병합 기록 확인
 - [x] Git 명령 7종 사용 확인: init, add, commit, push, pull, checkout, clone
 - [x] PRD 9장 완료 기준 체크리스트 전부 확인
-- [ ] 스크린샷 촬영
-  - [ ] 개발환경 (VS Code, Python 버전, Git 설정)
-  - [ ] 퀴즈 추가 (`docs/screenshots/add_quiz.png`)
-  - [ ] 퀴즈 목록
-  - [ ] 퀴즈 플레이 (`docs/screenshots/play.png`)
-  - [ ] 점수 확인 (`docs/screenshots/score.png`)
-  - [ ] 메뉴 (`docs/screenshots/menu.png`)
-  - [ ] `git log --oneline --graph`
-- [ ] 최종 `git push`
+- [x] 스크린샷 촬영
+  - [x] 개발환경 (VS Code, Python 버전, Git 설정)
+  - [x] 퀴즈 추가 (`docs/screenshots/add_quiz.png`)
+  - [x] 퀴즈 목록
+  - [x] 퀴즈 플레이 (`docs/screenshots/play.png`)
+  - [x] 점수 확인 (`docs/screenshots/score.png`)
+  - [x] 메뉴 (`docs/screenshots/menu.png`)
+  - [x] `git log --oneline --graph`
+- [x] 최종 `git push`
 - [ ] GitHub 저장소 URL 제출
 
 ## Task 14. 보너스 (선택)
-- [ ] 랜덤 출제 (`random` 모듈)
-- [ ] 문제 수 선택
+- [x] 랜덤 출제 (`random` 모듈)
+- [x] 문제 수 선택
 - [ ] 힌트 기능 (점수 차감)
 - [ ] 퀴즈 삭제
 - [ ] 점수 기록 히스토리 (날짜/시간, 푼 문제 수, 점수)
