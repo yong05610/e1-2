@@ -124,9 +124,13 @@ class QuizGame:
             print("⚠️ 등록된 퀴즈가 없습니다. 먼저 퀴즈를 추가하세요.")
             return
 
-        # 원본 목록(self.quizzes)의 순서는 그대로 두고, 복사본만 무작위로 섞는다
+        # 몇 문제를 풀지 선택 (1 ~ 등록된 전체 문제 수)
+        count = self.read_int(f"풀 문제 수 (1-{len(self.quizzes)}): ", 1, len(self.quizzes))
+
+        # 원본 목록(self.quizzes)의 순서는 그대로 두고, 복사본만 무작위로 섞은 뒤 앞에서 count개 사용
         order = self.quizzes[:]
         random.shuffle(order)
+        order = order[:count]
 
         total = len(order)
         print(f"\n📝 퀴즈를 시작합니다! (총 {total}문제)\n")
