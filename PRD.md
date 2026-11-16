@@ -129,7 +129,7 @@ e1-2/
 └── docs/screenshots/  # menu.png, play.png, add_quiz.png, score.png
 ```
 - 처음에는 `main.py` 한 파일에 두 클래스를 만들고, 필요하면 나눈다.
-- `state.json`은 `.gitignore`에 넣을지 커밋할지 정해 README에 적는다.
+- `state.json`은 평가에 필요하므로 `.gitignore`에 넣지 않고 저장소에 커밋한다. (README에 명시)
 
 ## 8. Git 작업 계획 (커밋 10개 이상)
 | 순서 | 작업 | 커밋 메시지 예 |

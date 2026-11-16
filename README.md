@@ -34,7 +34,7 @@ e1-2/
 ├── main.py        # 진입점 (python main.py)
 ├── quiz.py        # Quiz 클래스 (문제, 선택지, 정답, 출력/정답 확인/변환)
 ├── quiz_game.py   # QuizGame 클래스 (메뉴, 풀기, 추가, 목록, 점수, 저장/불러오기)
-├── state.json     # 실행 시 생성되는 데이터 파일 (.gitignore 대상)
+├── state.json     # 데이터 파일 (퀴즈 목록, 최고 점수 저장 / 평가를 위해 저장소에 포함)
 ├── README.md
 ├── PRD.md         # 제품 요구사항 문서
 ├── task.md        # 작업 목록
