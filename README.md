@@ -15,7 +15,7 @@
 python main.py
 ```
 
-<img src="docs/quiz_game_overview.png" alt="프로젝트 구조 요약" width="30%">
+<img src="docs/quiz_game_overview.png" alt="프로젝트 구조 요약" width="50%">
 
 ## 기능 목록
 | 메뉴 | 기능 |
