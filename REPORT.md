@@ -129,3 +129,37 @@
 | `git_graph.png` | `git log --oneline --graph` (브랜치 병합 기록) | ![git_graph](docs/screenshots/git_graph.png) |
 
 > `git_graph.png`는 보너스 브랜치 병합 직전의 그래프입니다. 최종 이력은 `git log --oneline --graph`로 확인할 수 있습니다.
+
+## 8. 학습 목표 정리 (과제 목표 15개 항목)
+과제 목표 3번의 15개 항목을 한 줄로 정리하고, 이 프로젝트의 어느 코드에서 사용했는지 연결했습니다.
+
+### Python 기초
+| # | 항목 | 설명 | 이 프로젝트의 예 |
+|---|---|---|---|
+| 1 | 변수가 무엇이고 왜 사용하는가 | 값에 이름을 붙여 저장해 두고, 여러 곳에서 다시 쓰고 나중에 바꾸기 위해 사용한다. | `correct = 0` (정답 수 집계), `self.best_score` (최고 점수) |
+| 2 | int, str, bool, list, dict의 차이 | `int` 정수, `str` 문자열, `bool` 참/거짓, `list` 순서가 있는 목록(번호로 접근, 0부터), `dict` 키-값 쌍(키로 접근). | `score`(int), `question`(str), `is_correct()`의 반환값(bool), `choices`·`quizzes`(list), `to_dict()`·`state.json`(dict) |
+| 3 | if / elif / else | 조건에 따라 실행할 코드를 나눈다. 위에서부터 검사해 처음 참인 한 곳만 실행한다. | `handle_choice`의 메뉴 분기, `update_best_score`의 최고 점수 비교 |
+| 4 | for와 while의 차이 | `for`는 대상이 정해진 반복(목록 순회), `while`은 조건이 참인 동안 반복(끝을 모를 때). | `for quiz in order` (출제), `while self.running` (메뉴 반복), `read_int`의 `while True` (올바른 입력이 올 때까지) |
+| 5 | 함수의 매개변수와 반환값 | 매개변수는 함수가 받는 입력, 반환값은 `return`으로 돌려주는 결과. | `read_int(prompt, low, high)` → 검증된 정수 반환, `is_correct(user_answer)` → `True`/`False` 반환 |
+
+### 클래스와 객체
+| # | 항목 | 설명 | 이 프로젝트의 예 |
+|---|---|---|---|
+| 6 | 클래스가 무엇이고 왜 사용하는가 | 관련된 데이터와 동작을 하나로 묶은 설계도. **추상화**(역할별로 나누어 필요한 것만 다룸)와 **재사용성**(같은 설계로 객체를 여러 개 생성)을 위해 사용한다. | `Quiz`는 문제 1개의 데이터와 동작(출력, 채점, 변환)을 묶어 퀴즈 하나하나를 같은 방식으로 만들고, `QuizGame`은 목록·점수·흐름·저장을 한 곳에서 관리해 역할을 분리 |
+| 7 | `__init__`과 `self`의 역할 | `__init__`은 객체를 만들 때 자동 호출되어 속성의 초기값을 정하는 생성자. `self`는 메서드를 호출한 그 객체 자신. | `Quiz("문제", [...], 2)` 호출 시 `__init__`이 실행되어 `self.question = question` 저장 |
+| 8 | 속성과 메서드의 정의와 활용 | 속성은 객체가 가진 데이터, 메서드는 객체가 하는 동작(클래스 안의 `def`). | 속성: `question`, `choices`, `answer`, `quizzes`, `best_score` / 메서드: `display()`, `is_correct()`, `play_quiz()`, `save_state()` |
+
+### 파일 입출력
+| # | 항목 | 설명 | 이 프로젝트의 예 |
+|---|---|---|---|
+| 9 | 파일을 열고 읽고 쓰는 기본 과정 | 열기 → 읽기/쓰기 → 닫기. `with`를 쓰면 블록이 끝날 때 자동으로 닫힌다. `"r"` 읽기, `"w"` 쓰기(기존 내용 삭제). | `load_state()` (`"r"`), `save_state()` (`"w"`), 둘 다 `encoding="utf-8"` |
+| 10 | JSON이란 무엇이고 왜 저장에 사용하는가 | 키-값과 배열로 데이터를 적는 텍스트 형식. 사람이 읽을 수 있고 dict/list와 쉽게 변환되며, 프로그램을 종료해도 데이터가 유지된다. | `state.json`에 퀴즈 목록과 최고 점수 저장 (`json.dump` / `json.load`) |
+| 11 | try / except로 오류 처리 | 오류가 나도 프로그램이 비정상 종료하지 않고 안내하거나 복구하도록 처리한다. | `int(text)`의 `ValueError`, 손상된 `state.json`의 `JSONDecodeError`, Ctrl+C·입력 종료(`KeyboardInterrupt`, `EOFError`) |
+
+### Git 기초
+| # | 항목 | 설명 | 이 프로젝트의 예 |
+|---|---|---|---|
+| 12 | Git이 무엇이고 왜 필요한가 | 변경 이력을 기록하는 분산 버전 관리 도구. 이전 상태 복구, 변경 추적, 브랜치를 이용한 안전한 개발, 협업을 위해 필요하다. | 기능 단위 커밋 20개 이상으로 개발 과정을 기록 |
+| 13 | init, add, commit, push, pull, checkout, clone의 역할 | `init` 저장소 생성 / `add` 커밋 대기 영역에 올림 / `commit` 로컬 이력으로 저장 / `push` 원격에 업로드 / `pull` 원격 변경을 가져와 병합 / `checkout` 브랜치 이동 / `clone` 원격 저장소를 복제 | 4장의 "Git 명령 7종 사용 증거" 표 참조 |
+| 14 | 브랜치를 생성하고 병합 | `git checkout -b 이름`으로 브랜치를 만들어 독립적으로 작업한 뒤, `main`에서 `git merge 이름`으로 합친다. | `feature/play`, `feature/random`, `feature/count`를 만들어 각각 `main`에 병합 |
+| 15 | 원격 저장소를 clone하고 pull로 변경 가져오기 | `clone`으로 복제한 폴더에서 수정·push한 뒤, 원래 폴더에서 `pull`로 가져와 반영을 확인한다. | `e1-2-clone`에서 README 수정 후 push → 원래 폴더에서 `git pull` (Fast-forward) |
